@@ -10,33 +10,61 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController {
-    
     var users = [User]()
-
+    
+    @IBOutlet weak var btnlogin: UIButton!
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var email: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnlogin.backgroundColor = UIColor.lightGray
         tblView.delegate =  self
         tblView.dataSource = self
-        
     }
     
-
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+//        fetchData()
+//    }
+    
+    
     @IBAction func saveBtn(_ sender: Any) {
         saveData()
     }
     
     @IBAction func showUsersBtn(_ sender: Any) {
         fetchData()
+        tblView.reloadData()
+    }
+    
+    @IBAction func btnLogin(_ sender: Any) {
+        validateData()
+    }
+    
+    func validateData() {
+        var username = ""
+        var useremail = ""
+        var checkRecord = false
+        for user in users {
+            username = user.value(forKeyPath: "name") as! String
+            useremail = user.value(forKeyPath: "email") as! String
+            if username == name.text && email.text == useremail {
+                checkRecord = true;
+            }
+        }
+        if checkRecord == true {
+            print("login successful")
+        } else {
+            print("login unsuccessful")
+        }
     }
     
     func saveData(){
         let name = self.name.text
         let email = self.email.text
         
-       let user = User(context: PersistenceService.context)
+        let user = User(context: PersistenceService.context)
         user.name = name
         user.email = email
         if (user.email?.isEmpty)! && (user.name?.isEmpty)!  {
@@ -54,12 +82,12 @@ class ViewController: UIViewController {
         do {
             let users = try PersistenceService.context.fetch(fetchRequest)
             self.users = users
-            tblView.reloadData()
         } catch let error {
             print(error)
             
         }
     }
+    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -73,6 +101,29 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = users[indexPath.row].email
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            self.tblView.dataSource?.tableView!(self.tblView, commit: .delete, forRowAt: indexPath)
+            return
+        }
+        deleteButton.backgroundColor = UIColor.black
+        return [deleteButton]
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            PersistenceService.context.delete(users[indexPath.row])
+            users.remove(at: indexPath.row)
+            PersistenceService.saveContext()
+            tableView.reloadData()
+        }
+    }
+    
+    
 }
+
+
 

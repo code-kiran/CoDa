@@ -14,7 +14,8 @@ class PersistenceService {
     static var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
-    // MARK: - Core Data stack
+    
+        // MARK: - Core Data stack
     
     static var persistentContainer: NSPersistentContainer = {
         /*
@@ -50,7 +51,6 @@ class PersistenceService {
         if context.hasChanges {
             do {
                 try context.save()
-                print("data saved")
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
