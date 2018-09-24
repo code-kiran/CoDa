@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F3DB1312158AA78009F4B0B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3DB1302158AA78009F4B0B /* HomeVC.swift */; };
+		9F3DB1342158AFFC009F4B0B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3DB1332158AFFC009F4B0B /* Helper.swift */; };
 		9FB5B0A8215734D300836E9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB5B0A7215734D300836E9D /* AppDelegate.swift */; };
-		9FB5B0AA215734D300836E9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB5B0A9215734D300836E9D /* ViewController.swift */; };
+		9FB5B0AA215734D300836E9D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB5B0A9215734D300836E9D /* LoginVC.swift */; };
 		9FB5B0AD215734D300836E9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5B0AB215734D300836E9D /* Main.storyboard */; };
 		9FB5B0B0215734D300836E9D /* CoDa.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB5B0AE215734D300836E9D /* CoDa.xcdatamodeld */; };
 		9FB5B0B2215734D400836E9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5B0B1215734D400836E9D /* Assets.xcassets */; };
@@ -18,9 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F3DB1302158AA78009F4B0B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		9F3DB1332158AFFC009F4B0B /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9FB5B0A4215734D300836E9D /* CoDa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoDa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FB5B0A7215734D300836E9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9FB5B0A9215734D300836E9D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9FB5B0A9215734D300836E9D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		9FB5B0AC215734D300836E9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9FB5B0AF215734D300836E9D /* CoDa.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoDa.xcdatamodel; sourceTree = "<group>"; };
 		9FB5B0B1215734D400836E9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -41,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F3DB1322158AFEC009F4B0B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				9F3DB1332158AFFC009F4B0B /* Helper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		9FB5B09B215734D300836E9D = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +72,7 @@
 		9FB5B0A6215734D300836E9D /* CoDa */ = {
 			isa = PBXGroup;
 			children = (
+				9F3DB1322158AFEC009F4B0B /* Helper */,
 				9FB5B0C521577ADC00836E9D /* Controller */,
 				9FB5B0C421577AD400836E9D /* View */,
 				9FB5B0C321577AC100836E9D /* Service */,
@@ -100,7 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				9FB5B0A7215734D300836E9D /* AppDelegate.swift */,
-				9FB5B0A9215734D300836E9D /* ViewController.swift */,
+				9FB5B0A9215734D300836E9D /* LoginVC.swift */,
+				9F3DB1302158AA78009F4B0B /* HomeVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -175,12 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB5B0AA215734D300836E9D /* ViewController.swift in Sources */,
+				9FB5B0AA215734D300836E9D /* LoginVC.swift in Sources */,
+				9F3DB1312158AA78009F4B0B /* HomeVC.swift in Sources */,
 				9FB5B0BD2157398000836E9D /* PersistenceService.swift in Sources */,
 				9FB5B0C121573D0E00836E9D /* User+CoreDataProperties.swift in Sources */,
 				9FB5B0B0215734D300836E9D /* CoDa.xcdatamodeld in Sources */,
 				9FB5B0A8215734D300836E9D /* AppDelegate.swift in Sources */,
 				9FB5B0C021573D0E00836E9D /* User+CoreDataClass.swift in Sources */,
+				9F3DB1342158AFFC009F4B0B /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

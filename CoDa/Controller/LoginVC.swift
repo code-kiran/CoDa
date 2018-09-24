@@ -9,37 +9,24 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class LoginVC: UIViewController {
     var users = [User]()
     
     @IBOutlet weak var btnlogin: UIButton!
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var email: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnlogin.backgroundColor = UIColor.lightGray
         tblView.delegate =  self
         tblView.dataSource = self
-    }
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(true)
-    //        fetchData()
-    //    }
-    
-    
-    @IBAction func saveBtn(_ sender: Any) {
-        saveData()
-    }
-    
-    @IBAction func showUsersBtn(_ sender: Any) {
-        fetchData()
-        tblView.reloadData()
-    }
-    
-    @IBAction func btnLogin(_ sender: Any) {
-        validateData()
+        if UserDefaults.standard.bool(forKey: "USERLOGGEDIN") == true {
+            navigator(animi: false)
+        } else {
+            print("cannot navigate something went wrong ")
+        }
     }
     
     func validateData() {
@@ -55,8 +42,23 @@ class ViewController: UIViewController {
         }
         if checkRecord == true {
             print("login successful")
+            UserDefaults.standard.set(true, forKey: "USERLOGGEDIN")
+            navigator(animi: true)
+            
         } else {
             print("login unsuccessful")
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        UserDefaults.standard.set(name.text, forKey: "NAME")
+    }
+    
+    
+    func navigator(animi: Bool) {
+        if     let vc = storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC {
+            navigationController?.pushViewController(vc, animated: animi)
         }
     }
     
@@ -65,16 +67,16 @@ class ViewController: UIViewController {
         let email = self.email.text
         
         if name == "" || email == ""  {
-             print("text field cant be empty fill  both ")
+            print("text field cant be empty fill  both ")
         } else {
-           
+            
             let user = User(context: PersistenceService.context)
             user.name = name
             user.email = email
             PersistenceService.saveContext()
             users.append(user)
             tblView.reloadData()
-
+            
         }
     }
     
@@ -89,9 +91,24 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func saveBtn(_ sender: Any) {
+        saveData()
+    }
+    
+    @IBAction func showUsersBtn(_ sender: Any) {
+        fetchData()
+        tblView.reloadData()
+    }
+    
+    @IBAction func btnLogin(_ sender: Any) {
+        validateData()
+    }
+    
+  
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension LoginVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
