@@ -23,10 +23,10 @@ class ViewController: UIViewController {
         tblView.dataSource = self
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//        fetchData()
-//    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(true)
+    //        fetchData()
+    //    }
     
     
     @IBAction func saveBtn(_ sender: Any) {
@@ -64,16 +64,17 @@ class ViewController: UIViewController {
         let name = self.name.text
         let email = self.email.text
         
-        let user = User(context: PersistenceService.context)
-        user.name = name
-        user.email = email
-        if (user.email?.isEmpty)! && (user.name?.isEmpty)!  {
-            print("text field cant be empty fill  both ")
-        }
-        else {
+        if name == "" || email == ""  {
+             print("text field cant be empty fill  both ")
+        } else {
+           
+            let user = User(context: PersistenceService.context)
+            user.name = name
+            user.email = email
             PersistenceService.saveContext()
             users.append(user)
             tblView.reloadData()
+
         }
     }
     
